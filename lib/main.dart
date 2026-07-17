@@ -6,26 +6,44 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app/theme.dart';
 import 'pages/login_page.dart';
+import 'provider/common_provider.dart';
 import 'services/configuration.dart';
+import 'services/local_storage_service.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // ใช้ฟอนต์ที่ bundle มาเท่านั้น — ไม่ fetch runtime (กันแอปค้างตอนไม่มีเน็ต)
   GoogleFonts.config.allowRuntimeFetching = false;
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const ProviderScope(child: MedFlowApp()));
+  // โหลดขนาดตัวอักษรที่ผู้ใช้เคยตั้งไว้ แล้ว override provider ก่อน runApp (กันจอกระพริบ)
+  final textScale = await LocalStorageService.getTextScale();
+  runApp(
+    ProviderScope(
+      overrides: [textScaleProvider.overrideWith((ref) => textScale)],
+      child: const MedFlowApp(),
+    ),
+  );
 }
 
-class MedFlowApp extends StatelessWidget {
+class MedFlowApp extends ConsumerWidget {
   const MedFlowApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'MedFlow',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       home: const LoginPage(),
+      // ปรับขนาดตัวอักษรทั้งแอปตามค่าที่ผู้ใช้เลือก (accessibility)
+      builder: (context, child) {
+        final scale = ref.watch(textScaleProvider);
+        return MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(scale)),
+          child: child!,
+        );
+      },
     );
   }
 }

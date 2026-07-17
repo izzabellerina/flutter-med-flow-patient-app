@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:med_flow_patient/main.dart';
@@ -6,7 +7,7 @@ import 'package:med_flow_patient/main.dart';
 void main() {
   testWidgets('Login page renders core fields and social buttons',
       (tester) async {
-    await tester.pumpWidget(const MedFlowApp());
+    await tester.pumpWidget(const ProviderScope(child: MedFlowApp()));
     await tester.pump();
 
     // หัวข้อ + ปุ่มเข้าสู่ระบบ

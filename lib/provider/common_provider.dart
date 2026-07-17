@@ -16,3 +16,7 @@ final meProvider = StateProvider<MeModel>(
 final userProvider = StateProvider<UserModel>(
   (ref) => UserModel(data: {}),
 );
+
+/// ขนาดตัวอักษรของทั้งแอป (accessibility) — A=1.0 / A+=1.15 / A++=1.3
+/// ค่าเริ่มต้นถูก override ใน main() ด้วยค่าที่จำไว้ (shared_preferences)
+final textScaleProvider = StateProvider<double>((ref) => 1.0);

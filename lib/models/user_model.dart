@@ -5,6 +5,7 @@ class UserModel {
   UserModel({required this.data});
 
   String get id => (data['id'] ?? '').toString();
+  String get hn => (data['hn'] ?? '').toString();
   String get username => data['username'] ?? '';
   String get fullName => data['full_name'] ?? data['name'] ?? '';
   String get phone => data['phone'] ?? '';

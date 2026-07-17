@@ -175,14 +175,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       TextField(
                         controller: _usernameController,
                         enabled: !_isLoading,
-                        style: AppTheme.generalText(15,
+                        style: AppTheme.generalText(16,
                             color: AppTheme.primaryText),
                         decoration: InputDecoration(
                           prefixIcon:
                               Icon(Icons.person, color: AppTheme.secondaryText62),
                           hintText: 'ชื่อเข้าใช้งาน',
-                          hintStyle: AppTheme.generalText(15,
-                              color: AppTheme.secondaryText9A),
+                          hintStyle: AppTheme.generalText(16,
+                              color: AppTheme.secondaryText62),
                         ),
                       ),
                       const SizedBox(height: 18),
@@ -194,14 +194,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         enabled: !_isLoading,
-                        style: AppTheme.generalText(15,
+                        style: AppTheme.generalText(16,
                             color: AppTheme.primaryText),
                         decoration: InputDecoration(
                           prefixIcon:
                               Icon(Icons.lock, color: AppTheme.secondaryText62),
                           hintText: 'รหัสผ่าน',
-                          hintStyle: AppTheme.generalText(15,
-                              color: AppTheme.secondaryText9A),
+                          hintStyle: AppTheme.generalText(16,
+                              color: AppTheme.secondaryText62),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _obscurePassword
@@ -234,7 +234,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           const SizedBox(width: 8),
                           Text(
                             'จดจำบัญชีผู้ใช้',
-                            style: AppTheme.generalText(14,
+                            style: AppTheme.generalText(16,
                                 color: AppTheme.primaryText),
                           ),
                         ],
@@ -314,7 +314,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: Text(
           text,
           style: AppTheme.generalText(
-            14,
+            16,
             color: AppTheme.primaryText,
             fonWeight: FontWeight.w500,
           ),
@@ -333,7 +333,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       label: Text(
         label,
         style: AppTheme.generalText(
-          15,
+          16,
           color: AppTheme.primaryText,
           fonWeight: FontWeight.w500,
         ),

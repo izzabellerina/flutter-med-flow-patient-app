@@ -33,8 +33,9 @@ class AuthService {
       'refresh_token': 'mock-refresh-token',
       'user': {
         'id': 'mock-1',
+        'hn': '123213312',
         'username': username,
-        'full_name': 'ผู้ป่วยทดสอบ',
+        'full_name': 'Thanawat Kaewphrom',
         'phone': '0800000000',
         'email': '$username@example.com',
       },
@@ -54,8 +55,9 @@ class AuthService {
     final mock = {
       'user': {
         'id': 'mock-1',
+        'hn': '123213312',
         'username': 'patient',
-        'full_name': 'ผู้ป่วยทดสอบ',
+        'full_name': 'Thanawat Kaewphrom',
         'phone': '0800000000',
         'email': 'patient@example.com',
       },
