@@ -1,6 +1,10 @@
 # Local dev-log (task specs + completion reports) — keep local, do not push
 /docs/dev-log/
 
+# Local agent/skill tooling — keep local, do not push
+/.agents/
+/.claude/
+
 # Miscellaneous
 *.class
 *.log
