@@ -7,6 +7,7 @@ import '../provider/common_provider.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/menu_tile.dart';
 import 'appointment/new_appointment_page.dart';
+import 'telemed/telemed_page.dart';
 
 /// หน้าแรก (Home Dashboard) — แท็บแรกใน MainPage shell
 class HomePage extends ConsumerWidget {
@@ -86,6 +87,12 @@ class HomePage extends ConsumerWidget {
     if (label == 'นัดหมาย') {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const NewAppointmentPage()),
+      );
+      return;
+    }
+    if (label == 'Telemed') {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const TelemedPage()),
       );
       return;
     }
