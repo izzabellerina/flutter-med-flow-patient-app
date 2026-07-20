@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app/theme.dart';
+import 'app/th_buddhist_localizations.dart';
 import 'pages/login_page.dart';
 import 'provider/common_provider.dart';
 import 'services/configuration.dart';
@@ -34,6 +36,15 @@ class MedFlowApp extends ConsumerWidget {
       title: 'MedFlow',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
+      // ล็อกทั้งแอปเป็นภาษาไทย — ปฏิทิน/date picker แสดงเดือน+ชื่อวันย่อเป็นไทย
+      locale: const Locale('th'),
+      supportedLocales: const [Locale('th')],
+      // ใช้ delegate Material แบบ พ.ศ. แทนตัวมาตรฐาน (ปฏิทินแสดงปีพุทธศักราช)
+      localizationsDelegates: const [
+        thaiBuddhistMaterialDelegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       home: const LoginPage(),
       // ปรับขนาดตัวอักษรทั้งแอปตามค่าที่ผู้ใช้เลือก (accessibility)
       builder: (context, child) {

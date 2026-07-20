@@ -6,6 +6,7 @@ import '../models/appointment_model.dart';
 import '../provider/common_provider.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/menu_tile.dart';
+import 'appointment/new_appointment_page.dart';
 
 /// หน้าแรก (Home Dashboard) — แท็บแรกใน MainPage shell
 class HomePage extends ConsumerWidget {
@@ -71,7 +72,7 @@ class HomePage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: _MenuGrid(
-                onTap: (label) => _comingSoon(context, label),
+                onTap: (label) => _onMenuTap(context, label),
               ),
             ),
             const SizedBox(height: 20),
@@ -79,6 +80,16 @@ class HomePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void _onMenuTap(BuildContext context, String label) {
+    if (label == 'นัดหมาย') {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const NewAppointmentPage()),
+      );
+      return;
+    }
+    _comingSoon(context, label);
   }
 
   void _comingSoon(BuildContext context, String feature) {

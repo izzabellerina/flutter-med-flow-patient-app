@@ -51,8 +51,9 @@ class AppointmentCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // แถวหมอ
+          // แถวหมอ + badge ประเภทนัด (มุมขวาบน)
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
                 radius: 24,
@@ -64,6 +65,7 @@ class AppointmentCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 2),
                     Text(
                       appointment.doctorName,
                       maxLines: 2,
@@ -87,6 +89,8 @@ class AppointmentCard extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
+              _TypeBadge(type: appointment.type),
             ],
           ),
           const SizedBox(height: 14),
@@ -159,6 +163,55 @@ class AppointmentCard extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// badge ประเภทนัด (Telemed / มาที่ รพ.) — pill สี + ไอคอน
+class _TypeBadge extends StatelessWidget {
+  final AppointmentType type;
+  const _TypeBadge({required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    final (Color color, IconData icon) = switch (type) {
+      AppointmentType.telemed => (
+          const Color(0xFF8B5CF6), // ม่วง
+          Icons.videocam_rounded,
+        ),
+      AppointmentType.onsite => (
+          const Color(0xFF2E7D8F), // teal เข้ม
+          Icons.local_hospital_rounded,
+        ),
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: 0.30),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: AppTheme.whiteColor),
+          const SizedBox(width: 4),
+          Text(
+            type.label,
+            style: AppTheme.generalText(
+              12,
+              fonWeight: FontWeight.w700,
+              color: AppTheme.whiteColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
