@@ -27,6 +27,9 @@ class AppointmentModel {
   final AppointmentStatus status;
   final String? avatarUrl;
 
+  /// ชื่อคนไข้ — แสดงในหัวห้อง Telemed ("คนไข้ : ...")
+  final String? patientName;
+
   /// วัน-เวลาจริงของนัด — ใช้กรองตามวันที่ (หน้า Telemed)
   /// เก็บแยกจาก [date]/[time] ที่เป็น string สำหรับแสดงผล
   final DateTime dateTime;
@@ -40,6 +43,7 @@ class AppointmentModel {
     this.type = AppointmentType.onsite,
     this.status = AppointmentStatus.waiting,
     this.avatarUrl,
+    this.patientName,
   });
 
   /// ข้อมูลตัวอย่างสำหรับหน้าแรก — แทนที่ด้วย API เมื่อฝั่ง patient พร้อม
@@ -89,6 +93,7 @@ class AppointmentModel {
         dateTime: at(0, 14, 0),
         type: AppointmentType.telemed,
         status: AppointmentStatus.ready,
+        patientName: 'สมศรี ใจดี',
       ),
       AppointmentModel(
         doctorName: 'พญ. สุดา ใจดี',
@@ -98,6 +103,7 @@ class AppointmentModel {
         dateTime: at(0, 16, 30),
         type: AppointmentType.telemed,
         status: AppointmentStatus.waiting,
+        patientName: 'ประสงค์ มั่นคง',
       ),
       AppointmentModel(
         doctorName: 'นพ. วีระ สุขใจ',
@@ -107,6 +113,7 @@ class AppointmentModel {
         dateTime: at(0, 9, 0),
         type: AppointmentType.telemed,
         status: AppointmentStatus.done,
+        patientName: 'วิภา สุขสันต์',
       ),
       // ── พรุ่งนี้ ──
       AppointmentModel(
@@ -117,6 +124,7 @@ class AppointmentModel {
         dateTime: at(1, 10, 0),
         type: AppointmentType.telemed,
         status: AppointmentStatus.waiting,
+        patientName: 'ธีรพงศ์ ใจงาม',
       ),
       // ── อีก 3 วัน ──
       AppointmentModel(
@@ -127,6 +135,7 @@ class AppointmentModel {
         dateTime: at(3, 13, 0),
         type: AppointmentType.telemed,
         status: AppointmentStatus.waiting,
+        patientName: 'กัญญา พรหมมา',
       ),
     ];
   }

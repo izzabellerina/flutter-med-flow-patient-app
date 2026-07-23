@@ -4,6 +4,7 @@ import '../../app/theme.dart';
 import '../../models/appointment_model.dart';
 import '../../widgets/month_calendar_picker.dart';
 import '../../widgets/telemed_appointment_card.dart';
+import 'telemed_room_page.dart';
 
 /// หน้า Telemed — รายการนัดหมาย Telemed กรองตามวันที่ (default = วันนี้)
 class TelemedPage extends StatefulWidget {
@@ -148,10 +149,11 @@ class _TelemedPageState extends State<TelemedPage> {
                       separatorBuilder: (_, __) => const SizedBox(height: 14),
                       itemBuilder: (context, i) => TelemedAppointmentCard(
                         appointment: items[i],
-                        onJoin: () =>
-                            _comingSoon('เข้าห้องตรวจ — ${items[i].doctorName}'),
-                        onViewDetail: () => _comingSoon(
-                            'รายละเอียด — ${items[i].doctorName}'),
+                        // "เข้าห้องตรวจ" → เข้าห้อง + เริ่มวิดีโอคอลทันที
+                        onJoin: () => _openRoom(items[i], startVideoCall: true),
+                        // "ดูรายละเอียด" → เข้าห้องเดียวกัน แต่ไม่เริ่มวิดีโอ
+                        onViewDetail: () =>
+                            _openRoom(items[i], startVideoCall: false),
                       ),
                     ),
             ),
@@ -161,9 +163,15 @@ class _TelemedPageState extends State<TelemedPage> {
     );
   }
 
-  void _comingSoon(String feature) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$feature — กำลังพัฒนา')),
+  // เปิดหน้าห้อง Telemed — เริ่มวิดีโอคอลทันทีเมื่อมาจากปุ่ม "เข้าห้องตรวจ"
+  void _openRoom(AppointmentModel appointment, {required bool startVideoCall}) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => TelemedRoomPage(
+          appointment: appointment,
+          startVideoCall: startVideoCall,
+        ),
+      ),
     );
   }
 }
